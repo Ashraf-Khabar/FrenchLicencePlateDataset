@@ -10,6 +10,8 @@ import glob
 
 START_BOUNDING_BOX_ID = 1
 PRE_DEFINE_CATEGORIES = None
+
+
 # If necessary, pre-define category and its id
 #  PRE_DEFINE_CATEGORIES = {"aeroplane": 1, "bicycle": 2, "bird": 3, "boat": 4,
 #  "bottle":5, "bus": 6, "car": 7, "cat": 8, "chair": 9,
@@ -21,6 +23,7 @@ PRE_DEFINE_CATEGORIES = None
 def get(root, name):
     vars = root.findall(name)
     return vars
+
 
 def get_and_check(root, name, length):
     vars = root.findall(name)
@@ -35,6 +38,7 @@ def get_and_check(root, name, length):
         vars = vars[0]
     return vars
 
+
 # def get_filename_as_int(filename):
 #     try:
 #         filename = filename.replace("\\", "/")
@@ -47,6 +51,7 @@ def get_filename_as_mine(filename):
     filename = filename.replace("\\", "/")
     filename = os.path.splitext(os.path.basename(filename))[0]
     return filename
+
 
 def get_categories(xml_files):
     """Generate category name to id mapping from a list of xml files.
@@ -72,8 +77,8 @@ def get_categories(xml_files):
 
     return {name: i for i, name in enumerate(classes_names)}
 
-def convert(xml_files, json_file):
 
+def convert(xml_files, json_file):
     json_dict = {"images": [], "type": "instances", "annotations": [], "categories": []}
 
     if PRE_DEFINE_CATEGORIES is not None:
@@ -163,6 +168,7 @@ def convert(xml_files, json_file):
     json_str = json.dumps(json_dict, indent=4)
     json_fp.write(json_str)
     json_fp.close()
+
 
 if __name__ == "__main__":
     import argparse
